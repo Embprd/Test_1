@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -26,13 +27,14 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QCustomPlot *widget;
-    QLineEdit *lineEdit_amp;
-    QLineEdit *lineEdit_freq;
-    QLabel *label;
-    QLabel *label_2;
+    QGridLayout *gridLayout;
     QPushButton *Apply_run;
     QPushButton *Apply_stop;
+    QLabel *label_2;
+    QLabel *label;
+    QLineEdit *lineEdit_amp;
+    QLineEdit *lineEdit_freq;
+    QCustomPlot *widget;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -43,31 +45,47 @@ public:
         MainWindow->resize(544, 444);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        widget = new QCustomPlot(centralwidget);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(30, 10, 381, 281));
-        lineEdit_amp = new QLineEdit(centralwidget);
-        lineEdit_amp->setObjectName("lineEdit_amp");
-        lineEdit_amp->setGeometry(QRect(420, 50, 113, 24));
-        lineEdit_freq = new QLineEdit(centralwidget);
-        lineEdit_freq->setObjectName("lineEdit_freq");
-        lineEdit_freq->setGeometry(QRect(420, 140, 113, 24));
-        label = new QLabel(centralwidget);
-        label->setObjectName("label");
-        label->setGeometry(QRect(440, 110, 81, 21));
-        QFont font;
-        font.setPointSize(12);
-        label->setFont(font);
-        label_2 = new QLabel(centralwidget);
-        label_2->setObjectName("label_2");
-        label_2->setGeometry(QRect(440, 20, 71, 21));
-        label_2->setFont(font);
+        gridLayout = new QGridLayout(centralwidget);
+        gridLayout->setObjectName("gridLayout");
         Apply_run = new QPushButton(centralwidget);
         Apply_run->setObjectName("Apply_run");
-        Apply_run->setGeometry(QRect(30, 310, 111, 24));
+
+        gridLayout->addWidget(Apply_run, 1, 0, 1, 1);
+
         Apply_stop = new QPushButton(centralwidget);
         Apply_stop->setObjectName("Apply_stop");
-        Apply_stop->setGeometry(QRect(170, 310, 111, 24));
+
+        gridLayout->addWidget(Apply_stop, 1, 1, 1, 1);
+
+        label_2 = new QLabel(centralwidget);
+        label_2->setObjectName("label_2");
+        QFont font;
+        font.setPointSize(12);
+        label_2->setFont(font);
+
+        gridLayout->addWidget(label_2, 1, 2, 1, 1);
+
+        label = new QLabel(centralwidget);
+        label->setObjectName("label");
+        label->setFont(font);
+
+        gridLayout->addWidget(label, 1, 3, 1, 1);
+
+        lineEdit_amp = new QLineEdit(centralwidget);
+        lineEdit_amp->setObjectName("lineEdit_amp");
+
+        gridLayout->addWidget(lineEdit_amp, 2, 2, 1, 1);
+
+        lineEdit_freq = new QLineEdit(centralwidget);
+        lineEdit_freq->setObjectName("lineEdit_freq");
+
+        gridLayout->addWidget(lineEdit_freq, 2, 3, 1, 1);
+
+        widget = new QCustomPlot(centralwidget);
+        widget->setObjectName("widget");
+
+        gridLayout->addWidget(widget, 0, 0, 1, 4);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -85,10 +103,10 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "Frequency", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "Amplitude", nullptr));
         Apply_run->setText(QCoreApplication::translate("MainWindow", "Run", nullptr));
         Apply_stop->setText(QCoreApplication::translate("MainWindow", "Stop", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "Amplitude", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Frequency", nullptr));
     } // retranslateUi
 
 };

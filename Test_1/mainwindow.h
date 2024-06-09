@@ -6,6 +6,7 @@
 #include <QDateTime>
 #include <math.h>
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -24,11 +25,15 @@ private:
     QTimer *timer;
     double t = 0;
     double y = 0;
+    double Amplitude = 0 ;
+    double Frequency = 0 ;
    // QVector<double> x, y; //Массивы координат точек
 
 private slots:
     void  PlaybackStep();
     void on_Apply_run_clicked();
     void on_Apply_stop_clicked();
+    void on_Apply_stop_2_clicked();
+
 };
 #endif // MAINWINDOW_H

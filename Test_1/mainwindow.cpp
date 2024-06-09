@@ -22,14 +22,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->lineEdit_amp->setText("1.0");
     ui->lineEdit_freq->setText("1.0");
 
-
     //Для показа границ по оси Oy сложнее, так как надо по правильному
     //вычислить минимальное и максимальное значение в векторах
 
-    ui->widget->yAxis->setRange(-1, 1);//Для оси Oy
+    ui->widget->yAxis->setRange(-5, 5);//Для оси Oy
 
     //Установим область, которая будет показываться на графике
-    ui->widget->xAxis->setRange(0,1000);//Для оси Ox
+    ui->widget->xAxis->setRange(0,2000);//Для оси Ox
 
     //Init Timer
 
@@ -46,9 +45,11 @@ MainWindow::~MainWindow()
 void MainWindow::PlaybackStep()
 {
 
+    Amplitude = ui->lineEdit_amp->text().toDouble();
+    Frequency = ui->lineEdit_freq->text().toDouble();
     // calculate two new data points:
     t+=1; // time elapsed since start of demo, in seconds
-    y = qSin(( M_PI/180) * t);
+    y =Amplitude*qSin(Frequency*( M_PI/180) * t);
 
     //Говорим, что отрисовать нужно график по нашим двум массивам x и y
     ui->widget->graph(0)->addData(t,y);
@@ -67,5 +68,14 @@ void MainWindow::on_Apply_run_clicked()
 void MainWindow::on_Apply_stop_clicked()
 {
     timer->stop();
+}
+
+
+void MainWindow::on_Apply_stop_2_clicked()
+{
+    ui->widget->clearGraphs();//Если нужно, но очищаем все графики
+    //Добавляем один график в widget
+    ui->widget->addGraph();
+    ui->widget->replot();
 }
 
